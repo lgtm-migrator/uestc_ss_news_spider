@@ -1,6 +1,7 @@
 var Sequelize = require("sequelize");
 var lib = require("../lib");
 var sequelize = new Sequelize('mysql://ss:ss-admin@suntao.science:3306/ss');
+var async = require("async");
 
 sequelize
     .authenticate()
@@ -26,18 +27,26 @@ var article = sequelize.define("article", {
 });
 
 var types = ["/notice.do", "/news.do", "/introduce.do", "/teachersList.do", "/research.do", "/info.do", "/international.do", "/friends.do", "/download.do"]
-
+var ids = [];
+for (var id = 3396; id > 0; id--) ids.push(id);
 article.sync({
     force: true
 }).then(function() {
-    for (var id = 3396; id > 1; id--) {
-        types.forEach((type) => {
+    async.eachSeries(ids, (id, cb) => {
+        async.eachSeries(types, (type, tcb) => {
             lib.parse_article("http://www.ss.uestc.edu.cn" + type + "?id=" + id, (result) => {
-                if (result.content != "" && result.id) {
-                    article.create(result);
-                    return
-                }
+                if (result && result.content != "" && result.id) {
+                    article.create(result).then(() => {
+                        cb();
+                    })
+                } else tcb();
             });
+        }, () => {
+            cb();
         })
-    }
+    }, function done() {
+
+    });
+
+
 });
