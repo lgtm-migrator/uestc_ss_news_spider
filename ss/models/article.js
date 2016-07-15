@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
         },
         title: DataTypes.STRING(40),
         content: DataTypes.STRING(4000),
-        type: DataTypes.STRING(40),
+        type: DataTypes.STRING(100),
         author: DataTypes.STRING,
         publisher: DataTypes.STRING,
         readnum: DataTypes.INTEGER,

@@ -30,10 +30,10 @@ var types = ["/notice.do", "/news.do", "/introduce.do", "/teachersList.do", "/re
 article.sync({
     force: true
 }).then(function() {
-    for (var id = 3396; id > 3200; id--) {
+    for (var id = 3396; id > 1; id--) {
         types.forEach((type) => {
             lib.parse_article("http://www.ss.uestc.edu.cn" + type + "?id=" + id, (result) => {
-                if (article.content != "") {
+                if (result.content != "" && result.id) {
                     article.create(result);
                     return
                 }
