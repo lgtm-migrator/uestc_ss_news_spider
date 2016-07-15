@@ -6,9 +6,9 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.INTEGER,
             primaryKey: true
         },
-        title: DataTypes.STRING,
-        content: DataTypes.TEXT,
-        type: DataTypes.INTEGER,
+        title: DataTypes.STRING(40),
+        content: DataTypes.STRING(4000),
+        type: DataTypes.STRING(40),
         author: DataTypes.STRING,
         publisher: DataTypes.STRING,
         readnum: DataTypes.INTEGER,
