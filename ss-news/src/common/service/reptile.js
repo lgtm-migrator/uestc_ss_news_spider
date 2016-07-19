@@ -1,10 +1,10 @@
 'use strict';
 
-var log4js = require("log4js");
-var log = log4js.getLogger();
-var request = require("request-promise");
-var cheerio = require("cheerio");
+import log4js from "log4js"
+import request from "request-promise"
+import cheerio from "cheerio"
 
+var log = log4js.getLogger();
 
 // reptileService 爬虫
 export default class extends think.service.base {

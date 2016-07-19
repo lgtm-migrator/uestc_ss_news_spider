@@ -6,7 +6,7 @@
 export default {
     type: 'mysql',
     connectionLimit: 5,
-    log_connect: true,
+    log_connect: false,
     adapter: {
         mysql: {
             host: 'suntao.science',
