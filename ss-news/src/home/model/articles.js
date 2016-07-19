@@ -8,6 +8,5 @@ export default class extends think.model.base {
         this.tablePrefix = "";
         this.tableName = "articles";
         this.pk = "id";
-
     }
 }

@@ -11,8 +11,11 @@
   "dependencies": {
     "babel-runtime": "6.x.x",
     "cheerio": "^0.20.0",
+    "log4js": "^0.6.38",
     "node-cron": "^1.1.1",
+    "node-crontab": "0.0.8",
     "request": "^2.73.0",
+    "request-promise": "^4.0.2",
     "source-map-support": "0.4.0",
     "thinkjs": "2.2.x"
   },
