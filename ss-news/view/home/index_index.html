@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>New ThinkJS Application</title>
+    <title>信软官网API</title>
     <style>
         * {
             padding: 0;
@@ -58,7 +58,7 @@
         
         .list .item {
             position: relative;
-            padding-left: 70px;
+            padding-left: 0px;
             margin-top: 50px;
         }
         
@@ -79,6 +79,12 @@
             font-weight: normal;
         }
         
+        .list .item h3 {
+            font-size: 18px;
+            padding-top: 15px;
+            font-weight: normal;
+        }
+        
         .list .item p {
             line-height: 30px;
             margin-top: 10px
@@ -89,32 +95,23 @@
 <body>
     <header>
         <div class="wrap">
-            <h1>A New App Created By ThinkJS</h1>
+            <h1>信软官网API</h1>
         </div>
     </header>
     <div class="content">
         <div class="list">
             <div class="item">
-                <div class="step">1</div>
-                <h2>Generate Files</h2>
-                <p>Run <code>thinkjs</code> command to create module, controler, model, service and so on. visit <a href="https://thinkjs.org/doc/thinkjs_command.html">https://thinkjs.org/doc/thinkjs_command.html</a> to view more infomation.</p>
-            </div>
-            <div class="item">
-                <div class="step">2</div>
-                <h2>Documatation</h2>
-                <p>ThinkJS has html and pdf documents. visit <a href="https://thinkjs.org/doc.html">https://thinkjs.org/doc.html</a></p>
-            </div>
-            <div class="item">
-                <div class="step">3</div>
-                <h2>WebSocket</h2>
-                <p>ThinkJS support <code>socket.io</code> and <code>sockjs</code> WebSocket client and server node. visit <a href="https://thinkjs.org/doc/adapter_websocket.html">https://thinkjs.org/doc/adapter_websocket.html</a></p>
-            </div>
-            <div class="item">
-                <div class="step">4</div>
-                <h2><%= time %></h2>
+                <h2>API</h2><br>
+                <h3>获取一条</h3>
+                <p><code>/articles/get/id/{id}</code> 获取一条数据(包含内容)</p>
+                <p>例如 <a href="/articles/get/id/3402">/articles/get/id/3402</a> 获取id为3402的文章</p>
+                <h3>获取一页</h3>
+                <p><code>/articles/gets[/page/{page}][/rows/{rows}]</code> 获取一页(id逆序 不包含内容)</p>
+                <p>例如
+                    <a href="/articles/gets/page/2/rows/5">/articles/gets/page/2/rows/5</a> 获取第二页(每页5条)
+                </p>
             </div>
         </div>
-    </div>
 </body>
 
 </html>

@@ -20,7 +20,8 @@ export default class extends Base {
         let page = this.param("page") || 1;
         let rows = this.param("rows") || 10;
         let articles = this.model("articles");
-        let data = await articles.limit((page - 1) * rows, rows).order("id desc").select();
+        // 不包含content字段
+        let data = await articles.limit((page - 1) * rows, rows).fieldReverse(["content"]).order("id desc").select();
         this.json(data);
     }
 
