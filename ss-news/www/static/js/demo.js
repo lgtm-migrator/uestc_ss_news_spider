@@ -1,10 +1,13 @@
 // Initialize app
 var demo = new Framework7({
     cache: true,
-    cacheDuration: 1000 * 60
+    cacheDuration: 1000 * 60,
+    hideNavbarOnPageScroll:true
 });
 var $$ = Framework7.$;
-var mainView = demo.addView('.view-main');
+var mainView = demo.addView('.view-main', {
+    dynamicNavbar: true,
+});
 
 
 var listTemplate = $$('script#list-template').html();
@@ -16,7 +19,7 @@ var compiledListTemplate = Template7.compile(listTemplate);
 var loading = false;
 
 // 每次加载添加多少条目
-var itemsPerLoad = 15;
+var itemsPerLoad = 7;
 
 var page = 1;
 
@@ -27,14 +30,12 @@ $$.get(`/home/articles/gets/page/${page}/rows/${itemsPerLoad}`, (data, status) =
         articles: JSON.parse(data)
     });
     // 添加新条目
-    $$('.list-block ul').append(html);
+    $$('#content-list').append(html);
     // 重置加载flag
 });
 
 
 
-// 更新最后加载的序号
-lastIndex = $$('.list-block li').length;
 
 // 注册'infinite'事件处理函数
 $$('.infinite-scroll').on('infinite', function() {
@@ -49,7 +50,7 @@ $$('.infinite-scroll').on('infinite', function() {
             articles: JSON.parse(data)
         });
         // 添加新条目
-        $$('.list-block ul').append(html);
+        $$('#content-list').append(html);
     });
 
 });

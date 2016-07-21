@@ -13,37 +13,37 @@
 
 <body>
 
-
-    <div data-page="home" class="view view-main">
-        <div class="navbar">
-            <div class="navbar-inner">
-                <div style="center: 0px;" class="center sliding">Demo</div>
-            </div>
+    <div class="views">
+      <div class="view view-main navbar-through" data-page="home">
+                <div class="navbar">
+          <div class="navbar-inner">
+            <div class="center">Demo</div>
+          </div>
         </div>
-        <div class="pages navbar-through">
-            <div data-page="home" class="page">
-                <div class="page-content infinite-scroll">
-                    <div class="list-block">
-                        <ul>
+        <div class="pages">
+          <div data-page="home" class="page page-on-center">
+            <div class="page-content  infinite-scroll">
+              <div class="content-block">
+                    <!--<div class="list-block">-->
+                    <div id="content-list"></div>
+                    <!--</div>-->
 
-                        </ul>
-                    </div>
-                    <!-- 加载提示符 -->
                     <div class="infinite-scroll-preloader">
                         <div class="preloader"></div>
                     </div>
-                </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-
 
 
 </body>
 
 <script id="list-template">
     {{#each articles}}
-    <li class = "card demo-card-header-pic" >   
+    <div class = "card demo-card-header-pic" >   
      {{#if img}}
     <div style = "background-image:url({{img}})" valign = "bottom" class = "card-header color-white no-border" > </div> 
     {{/if}}
@@ -55,7 +55,7 @@
          <div class = "card-footer">
     <a href = "/demo/page/id/{{id}}" class = "link" > Read more </a> 
     </div> 
-    </li>
+    </div>
     {{/each}}    
 </script>
 

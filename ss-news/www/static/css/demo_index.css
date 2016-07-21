@@ -24,18 +24,13 @@
             font-weight: 500;
         }
         
-        .facebook-card .facebook-date {
-            margin-left: 44px;
-            font-size: 13px;
-            color: #8e8e93;
-        }
-        
+
         .facebook-card .card-footer {
             background: #fafafa;
         }
         
         .facebook-card .card-footer a {
-            color: #81848b;
+            /*color: #81848b;*/
             font-weight: 500;
         }
         
@@ -44,11 +39,18 @@
         }
         
         .facebook-card .card-content-inner {
-            padding: 15px 10px;
+            padding: 10px;
         }
         
         .demo-card-header-pic .card-header {
             height: 40vw;
             background-size: cover;
             background-position: center;
+        }
+        
+        img {
+            width: 100% !important;
+            height: auto!important;
+            max-width: 100%!important;
+            display: block!important;
         }
