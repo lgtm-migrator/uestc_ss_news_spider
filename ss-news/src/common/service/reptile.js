@@ -8,10 +8,8 @@ var log = log4js.getLogger();
 
 // reptileService 爬虫
 export default class extends think.service.base {
-    /**
-     * init
-     * @return {}         []
-     */
+
+
     init(...args) {
         super.init(...args);
     }
@@ -100,13 +98,16 @@ export default class extends think.service.base {
                 let result = await articles.thenAdd(tmp_article, {
                     id: tmp_article.id
                 });
-                log.debug(result);
                 // 如果已经有相应id
-                if (result && result.type && result.type == "exist") {
-                    end = true;
-                    break;
-                } else {
+                if (result)
+                    if (result.type && result.type == "exist") {
+                        end = true;
+                        break;
+                    } else if (result) {
                     addnum += 1;
+                } else {
+                    log.warn('reptile result was undefined');
+                    break;
                 }
             }
             if (end) break;

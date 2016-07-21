@@ -8,7 +8,3 @@ let fn = async() => {
 }
 
 let updatenews = crontab.scheduleJob("*/15 * * * *", fn);
-
-if (think.env === "development") {
-    fn();
-}
