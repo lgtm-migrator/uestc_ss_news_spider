@@ -24,7 +24,6 @@
             font-weight: 500;
         }
         
-
         .facebook-card .card-footer {
             background: #fafafa;
         }
@@ -38,8 +37,11 @@
             display: block;
         }
         
-        .facebook-card .card-content-inner {
-            padding: 10px;
+        .content-block {
+            margin: 20px 0;
+            padding: 0 5px;
+            color: #6d6d72;
+            box-sizing: border-box;
         }
         
         .demo-card-header-pic .card-header {

@@ -1,16 +1,22 @@
-
-
 <div class="navbar">
-  <div class="navbar-inner">
-    <div class="left" style="padding-left:5px"><a href="#" class="back link">Back</a></div>
-    <div class="center"><%= article.title.substr(0,5) %>...</div>
-  </div>
+    <div class="navbar-inner">
+        <div class="left" style="padding-left:5px"><a href="#" class="back link">返回</a></div>
+        <div class="center">
+            <%= article.title.substr(0,5) %>...</div>
+    </div>
 </div>
 <div data-page="article" class="page">
-  <div class="page-content">
-       <div class="content-block-title center"><%= article.title %></div>
-    <div class="content-block">
-           <%- article.content||"" %>
+    <div class="page-content">
+        <div class="pull-to-refresh-layer">
+            <div class="preloader"></div>
+            <div class="pull-to-refresh-arrow"></div>
+        </div>
+
+        <div class="content-block-title center">
+            <%= article.title %>
+        </div>
+        <div class="content-block">
+            <%- article.content||"" %>
+        </div>
     </div>
-  </div>
 </div>
