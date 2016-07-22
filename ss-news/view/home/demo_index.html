@@ -15,11 +15,14 @@
 
 
     <div class="views">
-        <div class="view view-main navbar-through" data-page="home">
+        <div class="view view-main navbar-through">
 
             <div class="navbar">
                 <div class="navbar-inner">
                     <div class="center sliding">Demo</div>
+                    <div class="right">
+                        <a href="#" onclick="mainView.router.load({content:$$('#about').html()})" class="link">关于</a>
+                    </div>
                 </div>
             </div>
 
@@ -50,18 +53,18 @@
     <div class="content-block-title">{{pubtime}}</div>
     <div class="card demo-card-header-pic">
         {{#if img}}
-        <div style=" background-image:url({{img}}) " valign=" bottom " class="card-header color-white no-border lazy "> </div>
+        <div style="background-image:url({{img}}) " valign=" bottom " class="card-header color-white no-border lazy"> </div>
         {{/if}}
 
-        <div class="card-content ">
-            <div class="card-content-inner ">
-                <p class="color-black ">{{title}}</p>
+        <div class="card-content">
+            <div class="card-content-inner">
+                <p class="color-black">{{title}}</p>
             </div>
         </div>
 
         <div class="card-footer ">
             {{publisher}}
-            <a href="# " onclick="loadpage({{id}}) " class="link "> 更多</a>
+            <a href="#" onclick="loadpage({{id}}) " class="link "> 更多</a>
         </div>
     </div>
     {{/each}}
@@ -70,17 +73,57 @@
 <script id="page-temp" type="text/template7">
     <div class="navbar">
         <div class="navbar-inner">
-            <div class="left " style="padding-left:5px "><a href="#" class="back link">返回</a></div>
+            <div class="left"><a href="#" class="back link">返回</a></div>
             <div class="center sliding ">{{js "this.article.title.substr(0,5) "}}...</div>
+            <div class="right sliding">
+                <a href="#" onclick="pagemore({{article.id}})" class="link">更多</a>
+            </div>
+        </div>
+    </div>
+    <div data-page="article" class="page">
+        <div class="page-content ">
+            <div class="content-block-title inset center">
+                {{article.title}}
+            </div>
+            <div class="content-block inset">
+                {{article.content}}
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="page-more" type="text/template7">
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="left sliding"><a href="#" class="back link">返回</a></div>
+            <div class="center sliding">更多</div>
+        </div>
+    </div>
+    <div data-page="article" class="page">
+        <div class="page-content ">
+            <div class="content-block">
+                <ul>
+                    {{#each article}}
+                    <li>{{@key}}: {{this}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="about" type="text/html">
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="left " style="padding-left:5px "><a href="#" class="back link">返回</a></div>
+            <div class="center sliding ">关于</div>
         </div>
     </div>
     <div data-page="article " class="page ">
         <div class="page-content ">
             <div class="content-block-title inset center ">
-                {{article.title}}
-            </div>
-            <div class="content-block inset ">
-                {{article.content}}
+                <p>关于</p>
+                <p>欢迎来到这里</p>
             </div>
         </div>
     </div>
