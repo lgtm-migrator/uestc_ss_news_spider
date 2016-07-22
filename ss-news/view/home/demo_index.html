@@ -12,6 +12,16 @@
 </head>
 
 <body>
+    <!-- Panels Overlay -->
+    <div class="panel-overlay"></div>
+
+
+    <!-- Right Panel with Cover effect -->
+    <div class="panel panel-right panel-cover">
+        <div class="content-block">
+            <div id="panel-content"></div>
+        </div>
+    </div>
 
 
     <div class="views">
@@ -32,7 +42,7 @@
 
                     <div class="page-content  infinite-scroll">
                         <div class="content-block">
-                            <div id="content-list"></div>
+                            <div id="content-list" class="list-block virtual-list"></div>
                             <div class="infinite-scroll-preloader">
                                 <div class="preloader"></div>
                             </div>
@@ -82,7 +92,7 @@
     </div>
     <div data-page="article" class="page">
         <div class="page-content ">
-            <div class="content-block-title inset center">
+            <div class="content-block-title inset center" style="font-size:1.2rem">
                 {{article.title}}
             </div>
             <div class="content-block inset">
@@ -93,22 +103,13 @@
 </script>
 
 <script id="page-more" type="text/template7">
-    <div class="navbar">
-        <div class="navbar-inner">
-            <div class="left sliding"><a href="#" class="back link">返回</a></div>
-            <div class="center sliding">更多</div>
-        </div>
+    <div class="content-block-title inset center">
+        API字段和数据
     </div>
-    <div data-page="article" class="page">
-        <div class="page-content ">
-            <div class="content-block">
-                <ul>
-                    {{#each article}}
-                    <li>{{@key}}: {{this}}</li>
-                    {{/each}}
-                </ul>
-            </div>
-        </div>
+    <div class="content-block">
+        {{#each article}}
+        <p>{{@key}} : {{this}}</p>
+        {{/each}}
     </div>
 </script>
 
@@ -124,6 +125,8 @@
             <div class="content-block-title inset center ">
                 <p>关于</p>
                 <p>欢迎来到这里</p>
+                <p>这是一个Demo</p>
+                <p>主要用于演示ssnews项目的API</p>
             </div>
         </div>
     </div>

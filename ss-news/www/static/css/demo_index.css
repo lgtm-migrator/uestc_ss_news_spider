@@ -54,7 +54,7 @@
         }
         
         .content-block-title {
-            margin: 13px
+            margin: 13px;
         }
         
         .left {
@@ -63,4 +63,10 @@
         
         .right {
             padding: 5px
+        }
+        
+        span {
+            font-family: "微软雅黑"!important;
+            font-size: 0.9rem!important;
+            background: ""!important
         }
