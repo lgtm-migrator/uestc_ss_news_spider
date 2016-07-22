@@ -14,14 +14,10 @@
             padding: 10px;
         }
         
-        .facebook-card .facebook-avatar {
-            float: left;
-        }
-        
-        .facebook-card .facebook-name {
-            margin-left: 44px;
+        .facebook-date {
+            padding: 1rem;
             font-size: 14px;
-            font-weight: 500;
+            color: #8e8e93;
         }
         
         .facebook-card .card-footer {
@@ -55,4 +51,8 @@
             height: auto!important;
             max-width: 100%!important;
             display: block!important;
+        }
+        
+        .content-block-title {
+            margin: 13px
         }

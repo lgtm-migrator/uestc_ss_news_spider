@@ -1,17 +1,14 @@
 <div class="navbar">
     <div class="navbar-inner">
         <div class="left" style="padding-left:5px"><a href="#" class="back link">返回</a></div>
-        <div class="center">
+        <div class="center sliding">
             <%= article.title.substr(0,5) %>...</div>
     </div>
 </div>
-<div data-page="article" class="page">
-    <div class="page-content">
-        <div class="pull-to-refresh-layer">
-            <div class="preloader"></div>
-            <div class="pull-to-refresh-arrow"></div>
-        </div>
 
+<div data-page="article" class="page">
+
+    <div class="page-content">
         <div class="content-block-title center">
             <%= article.title %>
         </div>

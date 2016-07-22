@@ -17,25 +17,16 @@
     <div class="views">
         <div class="view view-main navbar-through" data-page="home">
 
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="center sliding">Demo</div>
+                </div>
+            </div>
 
             <div class="pages">
 
                 <div data-page="home" class="page page-on-center">
 
-                    <div class="panel-overlay"></div>
-                    <div class="navbar">
-                        <div class="navbar-inner">
-                            <div class="center">Demo</div>
-                        </div>
-                    </div>
-
-                    <div class="panel panel-right panel-cover">
-                        <div class="content-block">
-                            <p>Right Panel content here</p>
-                            <p><a href="#" class="close-panel">Close me</a></p>
-                            <p><a href="#" data-panel="left" class="open-panel">Open Left Panel</a></p>
-                        </div>
-                    </div>
                     <div class="page-content  infinite-scroll">
                         <div class="content-block">
                             <div id="content-list"></div>
@@ -56,25 +47,46 @@
 
 <script id="list-template" type="text/template7">
     {{#each articles}}
+    <div class="content-block-title">{{pubtime}}</div>
     <div class="card demo-card-header-pic">
         {{#if img}}
-        <div style="background-image:url({{img}})" valign="bottom" class="card-header color-white no-border lazy"> </div>
+        <div style=" background-image:url({{img}}) " valign=" bottom " class="card-header color-white no-border lazy "> </div>
         {{/if}}
-        <div class="card-content">
-            <div class="card-content-inner">
-                <p class="color-gray">{{title}}</p>
+
+        <div class="card-content ">
+            <div class="card-content-inner ">
+                <p class="color-black ">{{title}}</p>
             </div>
         </div>
-        <div class="card-footer">
-            <a href="#" class="link disable">{{pubtime}}</a>
-            <a href="/demo/page/id/{{id}}" class="link"> 更多</a>
+
+        <div class="card-footer ">
+            {{publisher}}
+            <a href="# " onclick="loadpage({{id}}) " class="link "> 更多</a>
         </div>
     </div>
     {{/each}}
 </script>
 
+<script id="page-temp" type="text/template7">
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="left " style="padding-left:5px "><a href="#" class="back link">返回</a></div>
+            <div class="center sliding ">{{js "this.article.title.substr(0,5) "}}...</div>
+        </div>
+    </div>
+    <div data-page="article " class="page ">
+        <div class="page-content ">
+            <div class="content-block-title inset center ">
+                {{article.title}}
+            </div>
+            <div class="content-block inset ">
+                {{article.content}}
+            </div>
+        </div>
+    </div>
+</script>
 
-<script type="text/javascript" src="/static/lib/Framework7/dist/js/framework7.min.js"></script>
-<script type="text/javascript" src="/static/js/demo.js"></script>
+<script type="text/javascript " src="/static/lib/Framework7/dist/js/framework7.min.js "></script>
+<script type="text/javascript " src="/static/js/demo.js "></script>
 
 </html>

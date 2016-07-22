@@ -28,15 +28,20 @@ var loadmore = () => {
     });
 }
 
+var loadpage = (id) => {
+    $$.get("/articles/get/id/" + id, (data, status) => {
+        var article = JSON.parse(data);
+        var html = Template7.templates["page-temp"]({ article: article });
+        mainView.router.load({ content: html });
+    })
+}
+
 loadmore();
-
-
 
 
 // 注册'infinite'事件处理函数
 $$('.infinite-scroll').on('infinite', function() {
     if (loading) return;
     loading = true;
-
     loadmore();
 });
