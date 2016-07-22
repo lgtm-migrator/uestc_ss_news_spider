@@ -4,7 +4,8 @@ var demo = new Framework7({
     cacheDuration: 1000 * 60,
     hideNavbarOnPageScroll: true,
     swipeBackPageActiveArea: 100,
-    precompileTemplates: true
+    precompileTemplates: true,
+    swipePanel: 'left'
 });
 var $$ = Framework7.$;
 var mainView = demo.addView('.view-main', {

@@ -13,15 +13,29 @@
 
 <body>
 
+
     <div class="views">
         <div class="view view-main navbar-through" data-page="home">
-            <div class="navbar">
-                <div class="navbar-inner">
-                    <div class="center">Demo</div>
-                </div>
-            </div>
+
+
             <div class="pages">
+
                 <div data-page="home" class="page page-on-center">
+
+                    <div class="panel-overlay"></div>
+                    <div class="navbar">
+                        <div class="navbar-inner">
+                            <div class="center">Demo</div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-right panel-cover">
+                        <div class="content-block">
+                            <p>Right Panel content here</p>
+                            <p><a href="#" class="close-panel">Close me</a></p>
+                            <p><a href="#" data-panel="left" class="open-panel">Open Left Panel</a></p>
+                        </div>
+                    </div>
                     <div class="page-content  infinite-scroll">
                         <div class="content-block">
                             <div id="content-list"></div>
@@ -34,6 +48,8 @@
             </div>
         </div>
     </div>
+
+
 
 
 </body>
