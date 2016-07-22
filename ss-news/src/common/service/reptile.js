@@ -92,24 +92,28 @@ export default class extends think.service.base {
         let articles = think.model("articles", think.config("db"), "home");
         while (true) {
             let list = await this.official_list(page);
-            for (let i = 0; i < list.length; i++) {
-                let ele = list[i];
-                let tmp_article = await this.parse_article(ele.url);
-                let result = await articles.thenAdd(tmp_article, {
-                    id: tmp_article.id
-                });
-                // 如果已经有相应id
-                if (result)
-                    if (result.type && result.type == "exist") {
+            if (list && list.length > 0)
+                for (let i = 0; i < list.length; i++) {
+                    let ele = list[i];
+                    let tmp_article = await this.parse_article(ele.url);
+                    let result = await articles.thenAdd(tmp_article, {
+                        id: tmp_article.id
+                    });
+                    // 如果已经有相应id
+                    if (result)
+                        if (result.type && result.type == "exist") {
+                            end = true;
+                            break;
+                        } else if (result) {
+                        addnum += 1;
+                    } else {
+                        log.warn('reptile result was undefined');
                         end = true;
                         break;
-                    } else if (result) {
-                    addnum += 1;
+                    }
                 } else {
-                    log.warn('reptile result was undefined');
-                    break;
+                    end = true;
                 }
-            }
             if (end) break;
             else {
                 page += 1;

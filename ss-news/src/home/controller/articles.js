@@ -20,10 +20,21 @@ export default class extends Base {
         let page = this.param("page") || 1;
         let rows = this.param("rows") || 10;
         let articles = this.model("articles");
+        let type = this.param("type") || undefined;
+        let typevalue = this.param("value") || undefined;
         // 不包含content字段
         let data = await articles.limit((page - 1) * rows, rows).fieldReverse(["content"]).order("id desc").select();
         this.json(data);
     }
 
+
+    //获取文章的种类
+    async typesAction() {
+        let articles = this.model("articles");
+        let data = await articles.distinct("type").select().map((item) => {
+            return item.type;
+        });
+        this.json(data)
+    }
 
 }
