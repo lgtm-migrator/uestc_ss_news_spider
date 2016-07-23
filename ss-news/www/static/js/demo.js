@@ -35,7 +35,7 @@ var loadmore = () => {
     $$.get(`/home/articles/gets/page/${page}/rows/${itemsPerLoad}`, (data, status) => {
         loading = false;
         var html = Template7.templates["list-template"]({
-            articles: JSON.parse(data)
+            articles: JSON.parse(data).data
         });
         homedom.append(html);
     });
@@ -53,7 +53,9 @@ $$('.infinite-scroll').on('infinite', function() {
 loadmore()
 
 demo.onPageInit("home", (page) => {
-    mainView.router.back({ content: homedom })
+    mainView.router.back({
+        content: homedom
+    })
     homedom.append(homedom);
     $$('.infinite-scroll').on('infinite', function() {
         if (loading) return;
@@ -72,15 +74,21 @@ demo.onPageBeforeRemove("home", (page) => {
 var loadpage = (id) => {
     $$.get("/articles/get/id/" + id, (data, status) => {
         currentarticle = JSON.parse(data);
-        var html = Template7.templates["page-temp"]({ article: currentarticle });
-        mainView.router.load({ content: html });
+        var html = Template7.templates["page-temp"]({
+            article: currentarticle
+        });
+        mainView.router.load({
+            content: html
+        });
     })
 }
 
 var pagemore = (id) => {
     var tmp = currentarticle;
     tmp.content = "省略"
-    var html = Template7.templates["page-more"]({ article: tmp });
+    var html = Template7.templates["page-more"]({
+        article: tmp
+    });
     panelcontent.html(html);
     demo.openPanel('right');
 }

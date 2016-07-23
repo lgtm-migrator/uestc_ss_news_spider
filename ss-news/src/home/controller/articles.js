@@ -20,10 +20,18 @@ export default class extends Base {
         let page = this.param("page") || 1;
         let rows = this.param("rows") || 10;
         let articles = this.model("articles");
-        let type = this.param("type") || undefined;
-        let typevalue = this.param("value") || undefined;
+        let colname = this.param("col") || undefined;
+        let colvalue = this.param("value") || undefined;
+        let where = new Object()
+        if (colname) where[colname] = colvalue;
+
         // 不包含content字段
-        let data = await articles.limit((page - 1) * rows, rows).fieldReverse(["content"]).order("id desc").select();
+        let data = await articles
+            .page(page, rows)
+            .fieldReverse(["content"])
+            .order("id desc")
+            .where(where)
+            .countSelect();
         this.json(data);
     }
 
@@ -31,10 +39,14 @@ export default class extends Base {
     //获取文章的种类
     async typesAction() {
         let articles = this.model("articles");
-        let data = await articles.distinct("type").select().map((item) => {
-            return item.type;
-        });
+        let data = await articles.field(["type", "count(*) as total"]).group('type').select();
         this.json(data)
+    }
+
+    async publishersAction() {
+        let articles = this.model("articles");
+        let data = await articles.field(["publisher", "count(*) as total"]).group("publisher").select();
+        this.json(data);
     }
 
 }

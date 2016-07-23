@@ -5,28 +5,26 @@
     <meta charset="UTF-8">
     <title>信软官网API</title>
     <link rel="stylesheet" href="/static/css/index_index.css">
+
 </head>
 
 <body>
     <header>
         <div class="wrap">
-            <h1>信软官网API</h1>
+            <h1 style="margin:5%">信软官网API</h1>
         </div>
     </header>
     <div class="content">
-        <div class="list">
-            <div class="item">
-                <h2>API</h2><br>
-                <h3>获取一条</h3>
-                <p><code>/articles/get/id/{id}</code> 获取一条数据(包含内容)</p>
-                <p>例如 <a href="/articles/get/id/3402">/articles/get/id/3402</a> 获取id为3402的文章</p>
-                <h3>获取一页</h3>
-                <p><code>/articles/gets[/page/{page}][/rows/{rows}]</code> 获取一页(id逆序 不包含内容)</p>
-                <p>例如
-                    <a href="/articles/gets/page/2/rows/5">/articles/gets/page/2/rows/5</a> 获取第二页(每页5条)
-                </p>
-            </div>
-        </div>
+
+        <br>
+        <div id="chart-1" style="width: 90%;height:400px;margin:5%"></div>
+        <br>
+        <div id="figure-2" style="width: 90%;height:700px;margin:5%"></div>
+    </div>
+
 </body>
+<script src="/static/lib/echarts.js"></script>
+<script src="/static/lib/jquery/dist/jquery.min.js"></script>
+<script src="/static/js/index_index.js"></script>
 
 </html>
