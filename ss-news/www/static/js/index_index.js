@@ -16,7 +16,6 @@ Reveal.initialize({
         }
     }, {
         src: '/static/lib/reveal.js/plugin/highlight/highlight.js',
-        async: true,
         callback: function() {
             hljs.initHighlightingOnLoad();
         }
