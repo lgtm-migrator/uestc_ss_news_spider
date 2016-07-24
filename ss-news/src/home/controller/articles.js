@@ -11,7 +11,9 @@ export default class extends Base {
     async getAction() { // async同步
         let articles = this.model("articles");
         //交给数据库处理 处理完后再返回
-        let data = await articles.find(this.param("id"));
+        let data = await articles
+            .cache("gets", 900)
+            .find(this.param("id"));
         this.json(data);
     }
 
@@ -27,6 +29,7 @@ export default class extends Base {
 
         // 不包含content字段
         let data = await articles
+            .cache("gets", 900)
             .page(page, rows)
             .fieldReverse(["content"])
             .order("id desc")
@@ -39,13 +42,13 @@ export default class extends Base {
     //获取文章的种类
     async typesAction() {
         let articles = this.model("articles");
-        let data = await articles.field(["type", "count(*) as total"]).group('type').select();
+        let data = await articles.cache("types", 900).field(["type", "count(*) as total"]).group('type').select();
         this.json(data)
     }
 
     async publishersAction() {
         let articles = this.model("articles");
-        let data = await articles.field(["publisher", "count(*) as total"]).group("publisher").select();
+        let data = await articles.cache("publishers", 900).field(["publisher", "count(*) as total"]).group("publisher").select();
         this.json(data);
     }
 

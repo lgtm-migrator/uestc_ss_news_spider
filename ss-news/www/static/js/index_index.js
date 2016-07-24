@@ -6,19 +6,18 @@ var figure2 = echarts.init(document.getElementById("figure-2"));
 $.get("/articles/types", (data, status) => {
     option = {
         title: {
-            text: "文章类型分布"
+            text: "文章类型分布",
+            textStyle: {
+                color: '#ffffff'
+            },
+        },
+        textStyle: {
+            color: '#ffffff'
         },
         tooltip: {
             trigger: 'item',
             formatter: "{a} <br/>{b}: {c} ({d}%)"
         },
-        // legend: {
-        //     orient: 'vertical',
-        //     x: 'left',
-        //     data: data.map((item) => {
-        //         return item.type
-        //     })
-        // },
         series: [{
             name: '文章类型',
             type: 'pie',
@@ -32,7 +31,7 @@ $.get("/articles/types", (data, status) => {
                 emphasis: {
                     show: true,
                     textStyle: {
-                        fontSize: '14',
+                        fontSize: '30',
                         fontWeight: 'bold'
                     }
                 }
@@ -59,6 +58,12 @@ $.get("/articles/publishers", (data, status) => {
     option = {
         title: {
             text: '文章分布',
+            textStyle: {
+                color: '#ffffff'
+            },
+        },
+        textStyle: {
+            color: '#ffffff'
         },
         tooltip: {
             trigger: 'axis',
@@ -67,7 +72,10 @@ $.get("/articles/publishers", (data, status) => {
             }
         },
         legend: {
-            data: ['文章数']
+            data: ['文章数'],
+            textStyle: {
+                color: 'white'
+            }
         },
         grid: {
             left: '3%',
@@ -97,3 +105,32 @@ $.get("/articles/publishers", (data, status) => {
     figure2.setOption(option);
 
 })
+
+
+
+Reveal.initialize({
+    dependencies: [{
+        src: '/static/lib/reveal.js/lib/js/classList.js',
+        condition: function() {
+            return !document.body.classList;
+        }
+    }, {
+        src: '/static/lib/reveal.js/plugin/markdown/marked.js',
+        condition: function() {
+            return !!document.querySelector('[data-markdown]');
+        }
+    }, {
+        src: '/static/lib/reveal.js/plugin/markdown/markdown.js',
+        condition: function() {
+            return !!document.querySelector('[data-markdown]');
+        }
+    }, {
+        src: '/static/lib/reveal.js/plugin/highlight/highlight.js',
+        async: true,
+        callback: function() {
+            hljs.initHighlightingOnLoad();
+        }
+    }]
+});
+
+
