@@ -1,3 +1,28 @@
+Reveal.initialize({
+    dependencies: [{
+        src: '/static/lib/reveal.js/lib/js/classList.js',
+        condition: function() {
+            return !document.body.classList;
+        }
+    }, {
+        src: '/static/lib/reveal.js/plugin/markdown/marked.js',
+        condition: function() {
+            return !!document.querySelector('[data-markdown]');
+        }
+    }, {
+        src: '/static/lib/reveal.js/plugin/markdown/markdown.js',
+        condition: function() {
+            return !!document.querySelector('[data-markdown]');
+        }
+    }, {
+        src: '/static/lib/reveal.js/plugin/highlight/highlight.js',
+        async: true,
+        callback: function() {
+            hljs.initHighlightingOnLoad();
+        }
+    }]
+});
+
 // 基于准备好的dom，初始化echarts实例
 var figure1 = echarts.init(document.getElementById('chart-1'));
 var figure2 = echarts.init(document.getElementById("figure-2"));
@@ -108,29 +133,5 @@ $.get("/articles/publishers", (data, status) => {
 
 
 
-Reveal.initialize({
-    dependencies: [{
-        src: '/static/lib/reveal.js/lib/js/classList.js',
-        condition: function() {
-            return !document.body.classList;
-        }
-    }, {
-        src: '/static/lib/reveal.js/plugin/markdown/marked.js',
-        condition: function() {
-            return !!document.querySelector('[data-markdown]');
-        }
-    }, {
-        src: '/static/lib/reveal.js/plugin/markdown/markdown.js',
-        condition: function() {
-            return !!document.querySelector('[data-markdown]');
-        }
-    }, {
-        src: '/static/lib/reveal.js/plugin/highlight/highlight.js',
-        async: true,
-        callback: function() {
-            hljs.initHighlightingOnLoad();
-        }
-    }]
-});
 
 
