@@ -10,9 +10,9 @@ export default class extends Base {
     // path = "/articles/get"
     async getAction() { // async同步
         let articles = this.model("articles");
+        let id = this.param("id");
         //交给数据库处理 处理完后再返回
         let data = await articles
-            .cache("gets", 900)
             .find(this.param("id"));
         this.json(data);
     }
@@ -29,7 +29,6 @@ export default class extends Base {
 
         // 不包含content字段
         let data = await articles
-            .cache("gets", 900)
             .page(page, rows)
             .fieldReverse(["content"])
             .order("id desc")
