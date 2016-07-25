@@ -7,7 +7,6 @@ $.get("/articles/types",(articles,status)=>{
 ```
 
 ```json
-
 [{
     "type": "新闻中心-学生新闻",
     "total": 10
