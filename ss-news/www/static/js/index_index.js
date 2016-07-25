@@ -20,6 +20,11 @@ Reveal.initialize({
         callback: function() {
             hljs.initHighlightingOnLoad();
         }
+    }, {
+        src: "",
+        callback: () => {
+            $("#loader").remove();
+        }
     }]
 });
 
@@ -132,3 +137,5 @@ $.get("/articles/publishers", (data, status) => {
     figure2.setOption(option);
 
 })
+
+$(document).ready(() => {})
