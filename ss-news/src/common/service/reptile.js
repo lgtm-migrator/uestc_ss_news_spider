@@ -14,7 +14,9 @@ export default class extends think.service.base {
         super.init(...args);
     }
 
-    // 获取一个最新的消息
+    /**
+     * 获取系统最大的id
+     */
     static async recentid() {
         let result = 0;
         try {
@@ -28,7 +30,7 @@ export default class extends think.service.base {
                 form: {
                     keyword: "%", //模糊查询
                 },
-                transform: function(body) {
+                transform: function (body) {
                     return cheerio.load(body, {
                         decodeEntities: false
                     });
@@ -47,8 +49,9 @@ export default class extends think.service.base {
 
     }
 
-    // 静态方法 static
-    // 这个方法用于生成一个网页对应的json数据
+    /**
+     * 根据url解析文章
+     */
     static async parse_article(url) {
         let article = {}
         try {
@@ -59,7 +62,7 @@ export default class extends think.service.base {
                     'Referer': 'http://www.ss.uestc.edu.cn/',
                     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106 Safari/537.36'
                 },
-                transform: function(body) {
+                transform: function (body) {
                     return cheerio.load(body, {
                         decodeEntities: false
                     });
@@ -84,8 +87,12 @@ export default class extends think.service.base {
         }
     }
 
-    //更新news
+    /**
+     * 从信软官网获取新闻的列表
+     * 并且解析，存入数据库
+     */
     static async update_news() {
+        log.info("从信软官网获取最新新闻")
         let page = 1;
         let addnum = 0;
         let end = false;
@@ -105,26 +112,29 @@ export default class extends think.service.base {
                             end = true;
                             break;
                         } else if (result) {
-                        addnum += 1;
-                    } else {
-                        log.warn('reptile result was undefined');
-                        end = true;
-                        break;
-                    }
+                            addnum += 1;
+                        } else {
+                            log.warn('reptile result was undefined');
+                            end = true;
+                            break;
+                        }
                 } else {
-                    end = true;
-                }
+                end = true;
+            }
             if (end) break;
             else {
                 page += 1;
             }
         }
+        if (addnum > 0) log.info(`更新${addnum}条数据`);
         return {
             addnum: addnum
         }
     }
 
-    //官方列表
+    /**
+     * 从页面获取id，url和标题
+     */
     static async official_list(page) {
         let idarr = [];
         try {
