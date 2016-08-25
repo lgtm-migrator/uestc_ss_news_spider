@@ -17,7 +17,7 @@
             "NODE_ENV": "development"
         },
         "externalConsole": false,
-        "sourceMaps": false,
+        "sourceMaps": true,
         "outDir": null
     }, {
         "name": "production",
@@ -36,7 +36,7 @@
             "NODE_ENV": "production"
         },
         "externalConsole": false,
-        "sourceMaps": false,
+        "sourceMaps": true,
         "outDir": null
     }, {
         "name": "附加",
@@ -45,7 +45,7 @@
         "port": 5858,
         "address": "localhost",
         "restart": false,
-        "sourceMaps": false,
+        "sourceMaps": true,
         "outDir": null,
         "localRoot": "${workspaceRoot}",
         "remoteRoot": null
