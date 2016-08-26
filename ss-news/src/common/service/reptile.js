@@ -4,7 +4,7 @@ import log4js from "log4js"
 import request from "request-promise"
 import cheerio from "cheerio"
 
-var log = log4js.getLogger();
+var log = log4js.getLogger("reptileService");
 
 // reptileService 爬虫
 export default class extends think.service.base {
@@ -30,7 +30,7 @@ export default class extends think.service.base {
                 form: {
                     keyword: "%", //模糊查询
                 },
-                transform: function (body) {
+                transform: function(body) {
                     return cheerio.load(body, {
                         decodeEntities: false
                     });
@@ -62,7 +62,7 @@ export default class extends think.service.base {
                     'Referer': 'http://www.ss.uestc.edu.cn/',
                     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106 Safari/537.36'
                 },
-                transform: function (body) {
+                transform: function(body) {
                     return cheerio.load(body, {
                         decodeEntities: false
                     });
@@ -92,7 +92,6 @@ export default class extends think.service.base {
      * 并且解析，存入数据库
      */
     static async update_news() {
-        log.info("从信软官网获取最新新闻")
         let page = 1;
         let addnum = 0;
         let end = false;
@@ -112,21 +111,23 @@ export default class extends think.service.base {
                             end = true;
                             break;
                         } else if (result) {
-                            addnum += 1;
-                        } else {
-                            log.warn('reptile result was undefined');
-                            end = true;
-                            break;
-                        }
+                        addnum += 1;
+                    } else {
+                        log.warn('reptile result was undefined');
+                        end = true;
+                        break;
+                    }
                 } else {
-                end = true;
-            }
+                    end = true;
+                }
             if (end) break;
             else {
                 page += 1;
             }
         }
-        if (addnum > 0) log.info(`更新${addnum}条数据`);
+        if (addnum > 0) {
+            log.info(`从信软官网获取最新新闻，更新${addnum}条数据`);
+        }
         return {
             addnum: addnum
         }

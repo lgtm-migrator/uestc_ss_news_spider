@@ -7,19 +7,27 @@ import cheerio from 'cheerio';
 export default class extends Base {
 
 
-    // path = "/articles/get"
-    async getAction() { // async同步
+    /**
+     * 获取一篇文章   
+     */
+    async getAction() {
+        // path = "/articles/get"
+        // async同步 
         let articles = this.model("articles");
         let id = this.param("id");
         //交给数据库处理 处理完后再返回
         let data = await articles
-            .cache(`article-get-${id}`, 3600)
+            .cache(`article-get-${id}`, 24 * 3600)
             .find(this.param("id"));
         this.json(data);
     }
 
-    // "/articles/gets"
+
+    /**
+     * 获取一页文章列表
+     */
     async getsAction() {
+        // "/articles/gets"
         let page = this.param("page") || 1;
         let rows = this.param("rows") || 10;
         let articles = this.model("articles");
@@ -30,7 +38,7 @@ export default class extends Base {
 
         // 不包含content字段
         let data = await articles
-            .cache(`article-gets-${page}-${rows}-${colname}-${colvalue}`)
+            .cache(`article-gets-${page}-${rows}-${colname}-${colvalue}`, 600)
             .page(page, rows)
             .fieldReverse(["content"])
             .order("id desc")
@@ -46,7 +54,7 @@ export default class extends Base {
     async typesAction() {
         let articles = this.model("articles");
         let data = await articles
-            .cache("types", 900)
+            .cache("types", 24 * 3600)
             .field(["type", "count(*) as total"])
             .group('type').select();
         this.json(data)
@@ -58,7 +66,7 @@ export default class extends Base {
     async publishersAction() {
         let articles = this.model("articles");
         let data = await articles
-            .cache("publishers", 900)
+            .cache("publishers", 24 * 3600)
             .field(["publisher", "count(*) as total"])
             .group("publisher").select();
         this.json(data);
