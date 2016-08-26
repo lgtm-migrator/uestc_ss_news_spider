@@ -78,10 +78,10 @@ export default class extends think.service.base {
             article.readnum = parseInt($(".inline > li:nth-child(4)").text().substr(3)) || undefined
             article.content = $(".contenttext").html().trim();
             let imgs = $(".contenttext img");
-            article.img = imgs[0].attribs.src || undefined;
+            article.img = (imgs && imgs[0] && !imgs[0].attribs.src.endsWith("icon_default.png") && imgs[0].attribs.src) || undefined;
         } catch (e) {
-            console.log(e.message)
-            console.log("cheerio parse error||request err")
+            log.warn(e.message)
+            log.warn("cheerio parse error||request err")
         } finally {
             return article;
         }

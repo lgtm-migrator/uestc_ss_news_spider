@@ -8,3 +8,7 @@ let updateNewsJob = async() => {
 }
 
 crontab.scheduleJob("*/10 * * * *", updateNewsJob);
+
+if (think.env === "development") {
+    updateNewsJob();
+}
