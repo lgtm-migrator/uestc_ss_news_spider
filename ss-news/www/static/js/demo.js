@@ -3,7 +3,7 @@ var demo = new Framework7({
     pushState: true,
     cache: true,
     cacheDuration: 1000 * 60,
-    hideNavbarOnPageScroll: true,
+    // hideNavbarOnPageScroll: true,
     swipeBackPageActiveArea: 100,
     precompileTemplates: true,
     swipePanel: 'left',
