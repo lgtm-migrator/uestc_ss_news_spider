@@ -70,3 +70,7 @@
             font-size: 0.9rem!important;
             background: ""!important
         }
+        
+        p {
+            background: transparent!important;
+        }
