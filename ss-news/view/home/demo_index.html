@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="/static/lib/Framework7/dist/css/framework7.ios.colors.min.css">
     <link rel="stylesheet" href="/static/css/demo_index.css">
     <script>
-        
     </script>
 </head>
 
@@ -32,19 +31,25 @@
 
             <div class="navbar">
                 <div class="navbar-inner">
-                    <div class="center sliding">Demo</div>
+                    <div class="center sliding">信软新闻</div>
                     <div class="right">
                         <a href="#" onclick="mainView.router.load({content:$$('#about').html()})" class="link">关于</a>
                     </div>
                 </div>
             </div>
 
+
             <div class="pages">
 
                 <div data-page="home" class="page page-on-center">
 
-                    <div class="page-content  infinite-scroll">
+                    <div class="page-content  infinite-scroll pull-to-refresh-content" data-ptr-distance="30">
                         <div class="content-block">
+                            <div class="pull-to-refresh-layer">
+                                <div class="preloader"></div>
+                                <div class="pull-to-refresh-arrow"></div>
+                            </div>
+
                             <div id="content-list" class="list-block virtual-list"></div>
                             <div class="infinite-scroll-preloader">
                                 <div class="preloader"></div>

@@ -13,16 +13,16 @@ var demo = new Framework7({
 
 var $$ = Framework7.$;
 var panelcontent = $$("#panel-content");
+var ptrContent = $$('.pull-to-refresh-content');
+
 var mainView = demo.addView('.view-main', {
     dynamicNavbar: true,
 });
 
 
-$$(document).on('pageBack', function(e) {
-    console.log(e)
-})
 
 demo.init();
+
 var loading = false;
 var itemsPerLoad = 7;
 var page = 0;
@@ -33,11 +33,11 @@ var currentarticle = "";
 var loadmore = () => {
     page += 1;
     $$.get(`/home/articles/gets/page/${page}/rows/${itemsPerLoad}`, (data, status) => {
-        loading = false;
         var html = Template7.templates["list-template"]({
             articles: JSON.parse(data).data
         });
         homedom.append(html);
+        loading = false;
     });
 }
 
@@ -46,6 +46,14 @@ $$('.infinite-scroll').on('infinite', function() {
     if (loading) return;
     loading = true;
     loadmore();
+});
+
+// 添加'refresh'监听器
+ptrContent.on('refresh', function(e) {
+    homedom.children().remove();
+    page = 0;
+    loadmore();
+    demo.pullToRefreshDone();
 });
 
 

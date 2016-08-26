@@ -74,3 +74,8 @@
         p {
             background: transparent!important;
         }
+        
+        .pull-to-refresh-layer {
+            margin-top: -55px;
+            margin-bottom: -25px;
+        }
