@@ -6,9 +6,11 @@
     "start": "node www/development.js",
     "compile": "babel --presets es2015-loose,stage-1 --plugins transform-runtime src/ --out-dir app/ --source-maps",
     "watch-compile": "node -e \"console.log('<npm run watch-compile> no longer need, use <npm start> command direct.');console.log();\"",
-    "watch": "npm run watch-compile"
+    "watch": "npm run watch-compile",
+    "gendoc":"apidoc -i src/ -o www/static/docs/"
   },
   "dependencies": {
+    "apidoc": "^0.16.1",
     "babel-runtime": "6.x.x",
     "cheerio": "^0.20.0",
     "log4js": "^0.6.38",
@@ -21,10 +23,10 @@
   },
   "devDependencies": {
     "babel-cli": "6.x.x",
-    "babel-preset-es2015-loose": "6.x.x",
-    "babel-preset-stage-1": "6.x.x",
+    "babel-core": "6.x.x",
     "babel-plugin-transform-runtime": "6.x.x",
-    "babel-core": "6.x.x"
+    "babel-preset-es2015-loose": "6.x.x",
+    "babel-preset-stage-1": "6.x.x"
   },
   "repository": "",
   "license": "MIT"

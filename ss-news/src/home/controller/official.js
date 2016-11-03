@@ -38,4 +38,5 @@ export default class extends Base {
         let result = await reptileService.update_news();
         this.json(result);
     }
+
 }

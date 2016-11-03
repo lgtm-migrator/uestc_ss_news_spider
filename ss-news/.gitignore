@@ -33,3 +33,7 @@ output.tar.gz
 app/
 
 runtime/
+
+# doc
+
+www/static/docs
