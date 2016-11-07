@@ -1,10 +1,17 @@
 
-Application created by [ThinkJS](http://www.thinkjs.org)
+信软官网API
 
 ## Install dependencies
 
 ```
 npm install
+bower install
+```
+
+## compile (used in production mode)
+
+```
+npm run compile
 ```
 
 ## Start server

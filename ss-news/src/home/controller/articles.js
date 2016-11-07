@@ -39,7 +39,7 @@ export default class extends Base {
 
 
     /**
-     * @api {all} /articles/gets/[page/{page}]/[rows/{rows}]/[col/{col}]/[value/{value}] Get Articles List
+     * @api {all} /articles/gets[/page/{page}][/rows/{rows}][/col/{col}][/value/{value}] Get Articles List
      * @apiGroup articles
      * @apiParam {int} page option, page number, default is page 1
      * @apiParam {int} rows option, articles per page, default is 10 articles per page
@@ -71,7 +71,7 @@ export default class extends Base {
 
 
     /**
-     * @api {all} /articles/ Articles Types
+     * @api {all} /articles/type Articles Types
      * @apiDescription 文章类型
      * @apiGroup articles
      * @apiSuccessExample {json} Success Example
@@ -122,17 +122,33 @@ export default class extends Base {
     }
 
     /**
-     * @api {all} /articles/mostread[/type/{type}] Most Read Articles
+     * @api {all} /articles/mostread[/type/{type}][/page/{page}] Most Read Articles
      * @apiGroup articles
      * @apiParam {string} type option, when "type == 'all'", return most readed articles in history, otherwise return last month most readed articles
      *
     **/
     async mostreadAction() {
         let view = this.param("type") == "all" ? "read_most_in_history" : "read_most_in_this_month";
-        let page = this.param('page') || 1;
+        let page = this.param('page') || 0;
         let perpage = 10;
         let data = await this.model()
             .query(`select * from ${view} limit ${page * perpage},${perpage}`)
+        this.json(data);
+    }
+
+    
+    /**
+     * @apiDescription 返回最近带有图片的文章
+     * @api {all} /articles/recentimg[/limit/{limit}] Recent Article With Img
+     * @apiName Recent Article With Img
+     * @apiGroup articles
+     * 
+     * @apiParam limit option, 声明返回的记录条数
+     * 
+     **/
+    async recentimgAction() {
+        let limit = this.param('limit') || 15;
+        let data = await this.model().query(`select * from recent_articles_with_img limit 0,${limit}`);
         this.json(data);
     }
 
