@@ -5,12 +5,10 @@
             "script": "www/production.js",
             "exec_mode": "fork",
             "instances": 1,
-            "max_memory_restart": "150M",
+            "max_memory_restart": "200M",
             "autorestart": true,
             "node_args": [
-                "--nolazy",
-                "--max_old_space_size=80",
-                "--max_executable_size=130"
+                "--max_old_space_size=120"
             ],
             "args": [],
             "env": {}
