@@ -46,3 +46,6 @@ sftp-config.json
 
 Framework7
 lib
+/ss-news/.vscode/*.DB
+typings
+/ss-news/yarn.lock

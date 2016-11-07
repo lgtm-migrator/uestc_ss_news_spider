@@ -14,6 +14,9 @@ export default class extends think.service.base {
         super.init(...args);
     }
 
+    static domain = "http://www.ss.uestc.edu.cn"
+    static notice_page = `http://www.ss.uestc.edu.cn/notice.do`
+
     /**
      * 获取系统最大的id
      */
@@ -30,7 +33,7 @@ export default class extends think.service.base {
                 form: {
                     keyword: "%", //模糊查询
                 },
-                transform: function(body) {
+                transform: function (body) {
                     return cheerio.load(body, {
                         decodeEntities: false
                     });
@@ -62,7 +65,7 @@ export default class extends think.service.base {
                     'Referer': 'http://www.ss.uestc.edu.cn/',
                     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106 Safari/537.36'
                 },
-                transform: function(body) {
+                transform: function (body) {
                     return cheerio.load(body, {
                         decodeEntities: false
                     });
@@ -106,11 +109,10 @@ export default class extends think.service.base {
                         id: tmp_article.id
                     });
                     // 如果已经有相应id
-                    if (result)
-                        if (result.type && result.type == "exist") {
-                            end = true;
-                            break;
-                        } else if (result) {
+                    if (result && result.type && result.type == "exist") {
+                        end = true;
+                        break;
+                    } else if (result) {
                         addnum += 1;
                     } else {
                         log.warn('reptile result was undefined');
@@ -118,8 +120,8 @@ export default class extends think.service.base {
                         break;
                     }
                 } else {
-                    end = true;
-                }
+                end = true;
+            }
             if (end) break;
             else {
                 page += 1;
@@ -130,6 +132,24 @@ export default class extends think.service.base {
         }
         return {
             addnum: addnum
+        }
+    }
+
+    static async refresh_readnum() {
+        const readnum = think.model("readnum", think.config("db"), "home");
+        const end = await this.recentid();
+        // current_article_id
+        for (let c_arti_id = 100; c_arti_id <= end; c_arti_id++) {
+            try {
+                let c_arti = await this.parse_article(`${this.notice_page}?id=${c_arti_id}`);
+                if (c_arti && c_arti.readnum) {
+                    await readnum.add({ article_id: c_arti.id, read_num: c_arti.readnum });
+                }
+            } catch (error) {
+                log.warn(`fetch article where id = ${c_arti_id}`)
+                log.warn(error.message)
+            }
+
         }
     }
 
