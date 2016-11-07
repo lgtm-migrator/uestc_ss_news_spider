@@ -7,7 +7,7 @@ export default {
     type: 'mysql',
     connectionLimit: 5,
     log_connect: true,
-    log_sql: true, //是否记录 sql 语句
+    log_sql: false, //是否记录 sql 语句
     adapter: {
         mysql: {
             host: 'suntao.science',

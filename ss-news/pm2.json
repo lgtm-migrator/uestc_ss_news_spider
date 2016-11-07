@@ -8,10 +8,12 @@
             "max_memory_restart": "200M",
             "autorestart": true,
             "node_args": [
-                "--max_old_space_size=120"
+                "--max_old_space_size=110"
             ],
             "args": [],
-            "env": {}
+            "env": {
+                "NODE_ENV": "production"
+            }
         }
     ]
 }

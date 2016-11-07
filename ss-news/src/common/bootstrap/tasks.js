@@ -9,7 +9,7 @@ let updateNewsJob = async () => {
 }
 
 crontab.scheduleJob("*/10 * * * *", updateNewsJob);
-crontab.scheduleJob("0 23 * * * ", reptile.refresh_readnum());
+crontab.scheduleJob("0 23 * * * ", reptile.refresh_readnum);
 
 // if (think.env === "development") {
 //     updateNewsJob();
