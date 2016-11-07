@@ -1,15 +1,19 @@
 {
-    "apps": [{
-		"name" : "ssnews",
-        "script": "www/production.js",
-        "exec_mode": "fork",
-        "instances": 1,
-        "max_memory_restart": "150M",
-        "autorestart": true,
-        "node_args": [],
-        "args": [],
-        "env": {
-
+    "apps": [
+        {
+            "name": "ssnews",
+            "script": "www/production.js",
+            "exec_mode": "fork",
+            "instances": 1,
+            "max_memory_restart": "150M",
+            "autorestart": true,
+            "node_args": [
+                "--nolazy",
+                "--max_old_space_size=80",
+                "--max_executable_size=130"
+            ],
+            "args": [],
+            "env": {}
         }
-    }]
+    ]
 }
