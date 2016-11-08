@@ -139,16 +139,20 @@ export default class extends think.service.base {
         const atcl_table = think.model("articles", think.config("db"), "home");
         const rd_num_table = think.model("readnum", think.config("db"), "home");
         const end = await this.recentid();
+        log.info("start add read number records");
         // current_article_id
         for (let c_arti_id = 100; c_arti_id <= end; c_arti_id++) {
+            let c_arti = {};
             try {
-                let c_arti = await this.parse_article(`${this.notice_page}?id=${c_arti_id}`);
+                c_arti = await this.parse_article(`${this.notice_page}?id=${c_arti_id}`);
                 if (c_arti && c_arti.content && c_arti.readnum) {
                     await rd_num_table.add({ article_id: c_arti.id, read_num: c_arti.readnum });
                 }
             } catch (error) {
                 try {
-                    await atcl_table.add(c_arti);
+                    log.info(`check readnum but no article in db, try to create the article ${c_arti_id}`)
+                    if (c_arti)
+                        await atcl_table.add(c_arti);
                     await rd_num_table.add({ article_id: c_arti.id, read_num: c_arti.readnum });
                 } catch (error) {
                     log.warn(error)
@@ -156,6 +160,8 @@ export default class extends think.service.base {
             }
 
         }
+
+        log.info("add read num records finished");
     }
 
     /**

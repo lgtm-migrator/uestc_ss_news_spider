@@ -13,8 +13,7 @@
             "runtimeExecutable": null,
             "runtimeArgs": [
                 "--nolazy",
-                "--max_old_space_size=80",
-                "--max_executable_size=130"
+                "--max_old_space_size=150"
             ],
             "env": {
                 "NODE_ENV": "development"
