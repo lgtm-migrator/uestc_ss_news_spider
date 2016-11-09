@@ -150,10 +150,10 @@ export default class extends think.service.base {
                 }
             } catch (error) {
                 try {
-                    log.info(`check readnum but no article in db, try to create the article ${c_arti_id}`)
-                    if (c_arti)
+                    if (c_arti) {
+                        log.info(`check readnum but no article in db, try to create the article ${c_arti_id}`)
                         await atcl_table.add(c_arti);
-                    await rd_num_table.add({ article_id: c_arti.id, read_num: c_arti.readnum });
+                    }
                 } catch (error) {
                     log.warn(error)
                 }

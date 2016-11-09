@@ -9,9 +9,10 @@ let updateNewsJob = async () => {
 }
 
 crontab.scheduleJob("*/10 * * * *", updateNewsJob);
-crontab.scheduleJob("1 23 * * * ", reptile.refresh_readnum);
+crontab.scheduleJob("25 9 * * *", () => reptile.refresh_readnum());
 
-if (think.env === "development") {
-    updateNewsJob();
-    reptile.refresh_readnum();
-}
+
+// if (think.env === "development") {
+//     updateNewsJob();
+//     reptile.refresh_readnum();
+// }
