@@ -6,6 +6,12 @@ import cheerio from 'cheerio';
 
 export default class extends Base {
 
+    init(http) {
+        super.init(http);
+        this.article_table = this.model("articles");
+        this.read_num_table = this.model("readnum");
+    }
+
 
     /**
      * @api {all} /articles/get/id/{id} Get An Article Detail
@@ -62,6 +68,7 @@ export default class extends Base {
         let data = await articles
             .cache(`article-gets-${page}-${rows}-${colname}-${colvalue}`, 600)
             .page(page, rows)
+            .group("title")
             .fieldReverse(["content"])
             .order("id desc")
             .where(where)
@@ -136,7 +143,7 @@ export default class extends Base {
         this.json(data);
     }
 
-    
+
     /**
      * @apiDescription 返回最近带有图片的文章
      * @api {all} /articles/recentimg[/limit/{limit}] Recent Article With Img
@@ -148,10 +155,33 @@ export default class extends Base {
      **/
     async recentimgAction() {
         let limit = this.param('limit') || 15;
-        let data = await this.model().query(`select * from recent_articles_with_img limit 0,${limit}`);
+        let data = await this.model()
+            .cache(`recent-img-${limit}`)
+            .query(`select * from recent_articles_with_img limit 0,${limit}`);
         this.json(data);
     }
 
-
+    /**
+     * @api {all} /articles/readnumhis Article Read Number history
+     * @apiGroup articles
+     * @apiParam {int} id article id 
+     * @apiParam {int} page option for page,default is 1 
+     * @apiParam {int} rows rows per page,default is 10
+     *
+    **/
+    async  readnumhisAction() {
+        let arti_id = this.param("id");
+        let page = this.param("page") || 1;
+        let rows = this.param("rows") || 10;
+        let data = { "error": "param error" };
+        if (arti_id) {
+            data = await this.read_num_table
+                .cache(`read-num-history-${arti_id}-${page}-${rows}`)
+                .page(page, rows)
+                .where({ article_id: arti_id })
+                .select()
+        }
+        this.json(data);
+    }
 
 }
